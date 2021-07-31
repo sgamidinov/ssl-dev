@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  nginx:
+    image: nginx:1.15.0-alpine
+    expose:
+      - 433
+      - 80
+    container_name: nginx
+    volumes:
+      - $PWD/conf.d:/etc/nginx/conf.d
+      - $PWD/ssl:/ssl
+    ports:
+      - 127.0.0.1:433:433
+      - 127.0.0.1:80:80
+    restart: unless-stopped
+
+    networks:
+      - main
+networks:
+  main:
